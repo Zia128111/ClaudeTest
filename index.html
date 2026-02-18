@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexus AI — Landing Pages</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #07080F;
+    color: #F0EEF8;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 28px;
+    letter-spacing: -1px;
+    background: linear-gradient(135deg, #7CFFD4, #5B8BFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    color: #6B6880;
+    margin-bottom: 56px;
+    font-weight: 300;
+  }
+
+  .pages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    width: 100%;
+    max-width: 900px;
+  }
+
+  .page-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    padding: 28px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.25s;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.3s;
+    border-radius: 16px;
+  }
+
+  .page-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255,255,255,0.14);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+  }
+
+  .page-card:nth-child(1):hover { box-shadow: 0 16px 40px rgba(91,139,255,0.15); border-color: rgba(91,139,255,0.3); }
+  .page-card:nth-child(2):hover { box-shadow: 0 16px 40px rgba(232,68,10,0.12); border-color: rgba(232,68,10,0.25); }
+  .page-card:nth-child(3):hover { box-shadow: 0 16px 40px rgba(167,139,250,0.15); border-color: rgba(167,139,250,0.3); }
+  .page-card:nth-child(4):hover { box-shadow: 0 16px 40px rgba(200,75,17,0.12); border-color: rgba(200,75,17,0.25); }
+  .page-card:nth-child(5):hover { box-shadow: 0 16px 40px rgba(96,71,234,0.15); border-color: rgba(96,71,234,0.3); }
+
+  .page-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .page-info { flex: 1; }
+
+  .page-number {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #4A4860;
+    margin-bottom: 4px;
+  }
+
+  .page-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    margin-bottom: 4px;
+    color: #F0EEF8;
+  }
+
+  .page-desc {
+    font-size: 13px;
+    color: #5C5C72;
+    font-weight: 300;
+  }
+
+  .arrow {
+    font-size: 18px;
+    color: #4A4860;
+    transition: transform 0.2s, color 0.2s;
+  }
+  .page-card:hover .arrow { transform: translateX(4px); color: #F0EEF8; }
+
+  .footer {
+    margin-top: 48px;
+    font-size: 13px;
+    color: #3A3850;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+  <div class="logo">nexus.ai</div>
+  <p class="subtitle">5 SaaS Landing Pages — Select a page to preview</p>
+
+  <div class="pages-grid">
+
+    <a href="page1-hero.html" class="page-card">
+      <div class="page-icon" style="background:rgba(91,139,255,0.12);">🚀</div>
+      <div class="page-info">
+        <div class="page-number">Page 01</div>
+        <div class="page-name">Hero / Home</div>
+        <div class="page-desc">Dark glassmorphism with animated dashboard</div>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+
+    <a href="page2-features.html" class="page-card">
+      <div class="page-icon" style="background:rgba(232,68,10,0.1);">⚡</div>
+      <div class="page-info">
+        <div class="page-number">Page 02</div>
+        <div class="page-name">Features</div>
+        <div class="page-desc">Bold editorial layout with feature grid</div>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+
+    <a href="page3-pricing.html" class="page-card">
+      <div class="page-icon" style="background:rgba(167,139,250,0.1);">💳</div>
+      <div class="page-info">
+        <div class="page-number">Page 03</div>
+        <div class="page-name">Pricing</div>
+        <div class="page-desc">3-tier pricing with featured plan glow</div>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+
+    <a href="page4-about.html" class="page-card">
+      <div class="page-icon" style="background:rgba(200,75,17,0.1);">🤝</div>
+      <div class="page-info">
+        <div class="page-number">Page 04</div>
+        <div class="page-name">About / Team</div>
+        <div class="page-desc">Warm serif editorial with team grid</div>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+
+    <a href="page5-signup.html" class="page-card">
+      <div class="page-icon" style="background:rgba(96,71,234,0.12);">✨</div>
+      <div class="page-info">
+        <div class="page-number">Page 05</div>
+        <div class="page-name">Sign Up</div>
+        <div class="page-desc">Split-panel onboarding with OAuth</div>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+
+  </div>
+
+  <p class="footer">Built with Claude · Ready for html.to.design → Figma import</p>
+</body>
+</html>
