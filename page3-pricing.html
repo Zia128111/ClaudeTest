@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexus AI — Pricing</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #08090E;
+    --surface: #0F111A;
+    --surface2: #151823;
+    --border: rgba(255,255,255,0.07);
+    --text: #E8E6F0;
+    --muted: #5C5C72;
+    --accent: #A78BFA;
+    --accent-glow: rgba(167,139,250,0.15);
+    --gold: #F4BE5A;
+    --green: #34D399;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Subtle noise */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  nav {
+    padding: 24px 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.5px;
+  }
+  .logo .dot { color: var(--accent); }
+
+  .nav-pills {
+    display: flex;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 4px;
+    gap: 2px;
+  }
+  .nav-pill {
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 14px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .nav-pill.active {
+    background: var(--surface2);
+    color: var(--text);
+  }
+
+  .btn-nav {
+    padding: 10px 24px;
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-nav:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  /* Header */
+  .pricing-header {
+    text-align: center;
+    padding: 80px 60px 60px;
+    position: relative;
+  }
+
+  .pricing-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 300px;
+    background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border: 1px solid rgba(167,139,250,0.25);
+    background: rgba(167,139,250,0.08);
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+    margin-bottom: 28px;
+  }
+
+  h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(40px, 5.5vw, 68px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin-bottom: 20px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .header-sub {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 480px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  /* Toggle */
+  .billing-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .toggle-track {
+    width: 48px;
+    height: 26px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    position: relative;
+    cursor: pointer;
+  }
+  .toggle-thumb {
+    position: absolute;
+    top: 3px;
+    left: 26px;
+    width: 18px;
+    height: 18px;
+    background: var(--accent);
+    border-radius: 50%;
+    transition: left 0.2s;
+  }
+
+  .save-badge {
+    background: rgba(52,211,153,0.15);
+    color: var(--green);
+    padding: 3px 8px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  /* Pricing cards */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 60px 80px;
+  }
+
+  .price-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .price-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+
+  .price-card.featured {
+    background: linear-gradient(135deg, #1A1030 0%, #0F0A20 100%);
+    border-color: rgba(167,139,250,0.3);
+    box-shadow: 0 0 0 1px rgba(167,139,250,0.1), 0 20px 60px rgba(167,139,250,0.08);
+  }
+
+  .popular-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: var(--bg);
+    padding: 4px 16px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+
+  .plan-name {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .featured .plan-name { color: var(--accent); }
+
+  .price-amount {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+    margin-bottom: 6px;
+  }
+  .currency {
+    font-size: 22px;
+    font-weight: 700;
+    margin-top: 8px;
+    color: var(--text);
+  }
+  .amount {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -2px;
+    color: var(--text);
+  }
+  .period {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-weight: 400;
+  }
+
+  .plan-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .features-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .features-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .feat-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .feat-check { color: var(--green); font-size: 13px; }
+  .feat-x { color: var(--muted); font-size: 16px; }
+
+  .li-muted { color: var(--muted); }
+
+  .plan-btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: -0.2px;
+  }
+
+  .plan-btn-outline {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .plan-btn-outline:hover {
+    border-color: rgba(255,255,255,0.2);
+    background: var(--surface2);
+  }
+
+  .plan-btn-filled {
+    background: var(--accent);
+    border: none;
+    color: var(--bg);
+  }
+  .plan-btn-filled:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px rgba(167,139,250,0.3);
+  }
+
+  /* FAQ / FAQ teaser */
+  .bottom-bar {
+    border-top: 1px solid var(--border);
+    padding: 40px 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .bottom-bar p {
+    font-size: 15px;
+    color: var(--muted);
+  }
+
+  .bottom-bar a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .trust-icons {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .trust-badge .icon {
+    width: 28px; height: 28px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+  <nav>
+    <div class="logo">nexus<span class="dot">.</span>ai</div>
+    <div class="nav-pills">
+      <div class="nav-pill">Home</div>
+      <div class="nav-pill">Features</div>
+      <div class="nav-pill active">Pricing</div>
+      <div class="nav-pill">Docs</div>
+    </div>
+    <button class="btn-nav">Start free trial</button>
+  </nav>
+
+  <div class="pricing-header">
+    <div class="eyebrow">✦ Simple, transparent pricing</div>
+    <h1>Invest in what<br><em>actually scales</em></h1>
+    <p class="header-sub">Start free, upgrade when you're ready. No surprise fees, no hidden limits. Cancel anytime.</p>
+
+    <div class="billing-toggle">
+      <span>Monthly</span>
+      <div class="toggle-track">
+        <div class="toggle-thumb"></div>
+      </div>
+      <span>Annually <span class="save-badge">Save 30%</span></span>
+    </div>
+  </div>
+
+  <div class="pricing-grid">
+
+    <!-- Starter -->
+    <div class="price-card">
+      <div class="plan-name">Starter</div>
+      <div class="price-amount">
+        <span class="currency">$</span>
+        <span class="amount">0</span>
+      </div>
+      <div class="period">forever free</div>
+      <p class="plan-desc">Perfect for solo operators and small experiments. Get started without a credit card.</p>
+      <ul class="features-list">
+        <li><span class="feat-icon feat-check">✓</span> Up to 3 projects</li>
+        <li><span class="feat-icon feat-check">✓</span> 1,000 AI queries/month</li>
+        <li><span class="feat-icon feat-check">✓</span> 5 integrations</li>
+        <li><span class="feat-icon feat-check">✓</span> Basic analytics</li>
+        <li><span class="feat-icon feat-check">✓</span> Community support</li>
+        <li><span class="feat-icon feat-x li-muted">×</span> <span class="li-muted">Advanced automation</span></li>
+        <li><span class="feat-icon feat-x li-muted">×</span> <span class="li-muted">Team collaboration</span></li>
+      </ul>
+      <button class="plan-btn plan-btn-outline">Get started free</button>
+    </div>
+
+    <!-- Pro -->
+    <div class="price-card featured">
+      <div class="popular-badge">⚡ Most Popular</div>
+      <div class="plan-name">Pro</div>
+      <div class="price-amount">
+        <span class="currency">$</span>
+        <span class="amount">49</span>
+      </div>
+      <div class="period">per seat / month</div>
+      <p class="plan-desc">For growing teams that need power, speed, and serious automation capabilities.</p>
+      <ul class="features-list">
+        <li><span class="feat-icon feat-check">✓</span> Unlimited projects</li>
+        <li><span class="feat-icon feat-check">✓</span> 100,000 AI queries/month</li>
+        <li><span class="feat-icon feat-check">✓</span> 50+ integrations</li>
+        <li><span class="feat-icon feat-check">✓</span> Advanced analytics + exports</li>
+        <li><span class="feat-icon feat-check">✓</span> Priority support (2hr SLA)</li>
+        <li><span class="feat-icon feat-check">✓</span> Full automation engine</li>
+        <li><span class="feat-icon feat-check">✓</span> Team workspace + roles</li>
+      </ul>
+      <button class="plan-btn plan-btn-filled">Start 14-day trial</button>
+    </div>
+
+    <!-- Enterprise -->
+    <div class="price-card">
+      <div class="plan-name">Enterprise</div>
+      <div class="price-amount">
+        <span class="currency" style="opacity:0"></span>
+        <span class="amount" style="font-size:48px; letter-spacing:-1px">Custom</span>
+      </div>
+      <div class="period">volume pricing</div>
+      <p class="plan-desc">For organizations with complex requirements, dedicated infrastructure, and compliance needs.</p>
+      <ul class="features-list">
+        <li><span class="feat-icon feat-check">✓</span> Everything in Pro</li>
+        <li><span class="feat-icon feat-check">✓</span> Unlimited AI queries</li>
+        <li><span class="feat-icon feat-check">✓</span> 200+ integrations + custom</li>
+        <li><span class="feat-icon feat-check">✓</span> Dedicated account manager</li>
+        <li><span class="feat-icon feat-check">✓</span> 15-min support SLA</li>
+        <li><span class="feat-icon feat-check">✓</span> SOC2, SSO, SAML, RBAC</li>
+        <li><span class="feat-icon feat-check">✓</span> On-premise deployment option</li>
+      </ul>
+      <button class="plan-btn plan-btn-outline">Contact sales →</button>
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <p>Have questions? <a href="#">Read our FAQ</a> or <a href="#">talk to our team</a>.</p>
+    <div class="trust-icons">
+      <div class="trust-badge">
+        <div class="icon">🔒</div>
+        SOC2 Certified
+      </div>
+      <div class="trust-badge">
+        <div class="icon">💳</div>
+        No card required
+      </div>
+      <div class="trust-badge">
+        <div class="icon">↩️</div>
+        Cancel anytime
+      </div>
+    </div>
+  </div>
+</body>
+</html>

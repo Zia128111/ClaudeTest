@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexus AI — About</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #FDFBF7;
+    --ink: #1C1A16;
+    --accent: #C84B11;
+    --warm: #8B6914;
+    --muted: #9E9589;
+    --border: #EAE5DC;
+    --surface: #F5F0E8;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+
+  nav {
+    padding: 28px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 28px;
+    letter-spacing: -1px;
+    color: var(--ink);
+  }
+  .logo span { color: var(--accent); }
+
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+  .nav-links a.active { color: var(--ink); }
+  .nav-links a:hover { color: var(--ink); }
+
+  .nav-cta {
+    padding: 11px 26px;
+    background: var(--ink);
+    color: var(--bg);
+    border: none;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 100px;
+    transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--accent); }
+
+  /* Hero */
+  .about-hero {
+    padding: 100px 80px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tag {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(44px, 5.5vw, 72px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    margin-bottom: 28px;
+  }
+
+  h1 em { font-style: italic; color: var(--accent); }
+
+  .hero-text p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 440px;
+  }
+
+  .hero-visual {
+    position: relative;
+  }
+
+  .hero-img-frame {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: var(--surface);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .photo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+  }
+
+  .photo-cell {
+    border-radius: 10px;
+    background: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    transition: transform 0.3s;
+  }
+  .photo-cell:hover { transform: scale(1.02); }
+  .photo-cell:nth-child(1) { background: linear-gradient(135deg, #FFD4C2, #FFAA88); }
+  .photo-cell:nth-child(2) { background: linear-gradient(135deg, #C2D4FF, #8899FF); grid-row: span 2; }
+  .photo-cell:nth-child(3) { background: linear-gradient(135deg, #D4FFC2, #88CC66); }
+
+  .stat-float {
+    position: absolute;
+    bottom: -16px;
+    left: -24px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  }
+  .stat-float-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+  .stat-float-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* Mission */
+  .mission {
+    padding: 80px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .mission-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-top: 4px;
+  }
+
+  .mission blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: -0.5px;
+    color: var(--ink);
+    margin-bottom: 36px;
+  }
+
+  .mission blockquote strong {
+    font-style: normal;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .mission p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 620px;
+    margin-bottom: 16px;
+  }
+
+  /* Team */
+  .team-section {
+    padding: 80px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 52px;
+  }
+
+  .section-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+  .section-header h2 em { font-style: italic; color: var(--accent); }
+
+  .section-header p {
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 280px;
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+
+  .team-card {
+    cursor: pointer;
+  }
+
+  .team-photo {
+    width: 100%;
+    aspect-ratio: 3/4;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 44px;
+    transition: transform 0.3s;
+    overflow: hidden;
+    position: relative;
+  }
+  .team-card:hover .team-photo { transform: scale(1.02); }
+  .team-photo:nth-child(1) { background: linear-gradient(160deg, #FFE4D6, #FFBFA0); }
+
+  .team-photo-bg1 { background: linear-gradient(160deg, #FFE4D6, #FFBFA0); }
+  .team-photo-bg2 { background: linear-gradient(160deg, #D6E4FF, #A0BFFF); }
+  .team-photo-bg3 { background: linear-gradient(160deg, #D6FFE4, #A0FFC0); }
+  .team-photo-bg4 { background: linear-gradient(160deg, #FFD6F4, #FFA0E8); }
+
+  .team-name {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 4px;
+    letter-spacing: -0.3px;
+  }
+
+  .team-role {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  .team-linkedin {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--accent);
+    margin-top: 8px;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  /* Values */
+  .values-section {
+    padding: 80px;
+    background: var(--ink);
+    color: var(--bg);
+  }
+
+  .values-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 52px;
+  }
+
+  .values-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+  .values-header h2 em { font-style: italic; color: var(--accent); }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .value-item {
+    padding: 40px;
+    background: var(--ink);
+    transition: background 0.3s;
+  }
+  .value-item:hover { background: #2A2820; }
+
+  .value-num {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.25);
+    margin-bottom: 20px;
+  }
+
+  .value-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+  }
+
+  .value-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.45);
+    font-weight: 300;
+  }
+</style>
+</head>
+<body>
+  <nav>
+    <div class="logo">nexus<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#">Product</a></li>
+      <li><a href="#">Features</a></li>
+      <li><a href="#" class="active">About</a></li>
+      <li><a href="#">Careers</a></li>
+    </ul>
+    <button class="nav-cta">Join the team →</button>
+  </nav>
+
+  <div class="about-hero">
+    <div class="hero-text">
+      <div class="tag">Our Story</div>
+      <h1>We build tools<br>for <em>builders</em></h1>
+      <p>Founded in 2021 by a team tired of switching between 14 different SaaS tools, Nexus was built to unify work. We believe the best software feels invisible — it just works.</p>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-img-frame">
+        <div class="photo-grid">
+          <div class="photo-cell">🚀</div>
+          <div class="photo-cell">💡</div>
+          <div class="photo-cell">⚡</div>
+        </div>
+      </div>
+      <div class="stat-float">
+        <div class="stat-float-num">2021</div>
+        <div class="stat-float-label">Founded in San Francisco</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission">
+    <div class="mission-label">Our Mission</div>
+    <div>
+      <blockquote>"Software should <strong>amplify human potential,</strong> not create new bottlenecks."</blockquote>
+      <p>We started Nexus because we believed there was a better way. A single platform that could hold the full context of your work — your projects, your data, your team — and surface exactly what you need when you need it.</p>
+      <p>Today, over 12,000 teams trust Nexus to power their most critical workflows. We're just getting started.</p>
+    </div>
+  </div>
+
+  <div class="team-section">
+    <div class="section-header">
+      <div>
+        <div class="tag">The Team</div>
+        <h2>Meet the people<br>behind <em>Nexus</em></h2>
+      </div>
+      <p>A team of 42 people spread across San Francisco, New York, and London.</p>
+    </div>
+
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-photo team-photo-bg1">👩‍💼</div>
+        <div class="team-name">Sarah Chen</div>
+        <div class="team-role">Co-founder & CEO</div>
+        <a href="#" class="team-linkedin">LinkedIn ↗</a>
+      </div>
+      <div class="team-card">
+        <div class="team-photo team-photo-bg2">👨‍💻</div>
+        <div class="team-name">Marcus Webb</div>
+        <div class="team-role">Co-founder & CTO</div>
+        <a href="#" class="team-linkedin">LinkedIn ↗</a>
+      </div>
+      <div class="team-card">
+        <div class="team-photo team-photo-bg3">👩‍🎨</div>
+        <div class="team-name">Priya Nair</div>
+        <div class="team-role">Head of Design</div>
+        <a href="#" class="team-linkedin">LinkedIn ↗</a>
+      </div>
+      <div class="team-card">
+        <div class="team-photo team-photo-bg4">👨‍📈</div>
+        <div class="team-name">Jordan Lee</div>
+        <div class="team-role">VP of Growth</div>
+        <a href="#" class="team-linkedin">LinkedIn ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="values-section">
+    <div class="values-header">
+      <div>
+        <div style="font-size:11px; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:16px;">Our Values</div>
+        <h2>What we<br><em>believe in</em></h2>
+      </div>
+    </div>
+    <div class="values-grid">
+      <div class="value-item">
+        <div class="value-num">01</div>
+        <div class="value-title">Speed over perfection</div>
+        <p class="value-desc">We ship fast, learn faster. A good decision made quickly beats a perfect decision made never.</p>
+      </div>
+      <div class="value-item">
+        <div class="value-num">02</div>
+        <div class="value-title">Radical transparency</div>
+        <p class="value-desc">We share everything openly — our metrics, our mistakes, our roadmap. Honesty builds trust.</p>
+      </div>
+      <div class="value-item">
+        <div class="value-num">03</div>
+        <div class="value-title">Customer obsession</div>
+        <p class="value-desc">Every decision starts with the customer. If it doesn't make their life easier, we don't build it.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

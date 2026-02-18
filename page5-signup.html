@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexus AI — Get Started</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #F8F7FF;
+    --surface: #FFFFFF;
+    --ink: #13111F;
+    --accent: #6047EA;
+    --accent-light: #EDE9FF;
+    --muted: #7F7A96;
+    --border: #E8E5F5;
+    --success: #10B981;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Left panel */
+  .left-panel {
+    background: var(--ink);
+    display: flex;
+    flex-direction: column;
+    padding: 48px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .left-panel::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(ellipse, rgba(96,71,234,0.3) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .left-panel::after {
+    content: '';
+    position: absolute;
+    bottom: -80px;
+    left: -80px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(ellipse, rgba(96,71,234,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .panel-logo {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: white;
+    letter-spacing: -0.5px;
+    position: relative;
+    z-index: 1;
+  }
+  .panel-logo span { color: var(--accent); }
+
+  .panel-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    padding-bottom: 40px;
+  }
+
+  .panel-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 20px;
+  }
+
+  .panel-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(36px, 4vw, 52px);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    color: white;
+    margin-bottom: 24px;
+  }
+  .panel-title em {
+    font-style: italic;
+    color: rgba(180,160,255,1);
+  }
+
+  .panel-desc {
+    font-size: 15px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.8;
+    font-weight: 300;
+    max-width: 380px;
+    margin-bottom: 48px;
+  }
+
+  /* Feature points */
+  .panel-features {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 52px;
+  }
+
+  .panel-feat {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .feat-bullet {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(96,71,234,0.25);
+    border: 1px solid rgba(96,71,234,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 14px;
+  }
+
+  .feat-text strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 2px;
+  }
+  .feat-text span {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  /* Social proof */
+  .social-proof {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 24px;
+  }
+
+  .stars {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .testimonial {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.7);
+    font-style: italic;
+    margin-bottom: 16px;
+    font-family: 'Instrument Serif', serif;
+    font-size: 16px;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .author-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6047EA, #A78BFA);
+  }
+  .author-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.8);
+  }
+  .author-role {
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+  }
+
+  /* Right panel */
+  .right-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 64px;
+  }
+
+  .form-container {
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .form-header {
+    margin-bottom: 36px;
+  }
+
+  .step-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .step {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    transition: all 0.3s;
+  }
+  .step.active {
+    background: var(--accent);
+    width: 24px;
+    border-radius: 4px;
+  }
+
+  .form-header h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 36px;
+    font-weight: 400;
+    letter-spacing: -0.8px;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .form-header h2 em { font-style: italic; color: var(--accent); }
+
+  .form-header p {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  /* OAuth buttons */
+  .oauth-group {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .oauth-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .oauth-btn:hover {
+    border-color: var(--accent);
+    background: var(--accent-light);
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Form fields */
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  input {
+    width: 100%;
+    padding: 13px 16px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(96,71,234,0.1);
+  }
+  input::placeholder { color: var(--muted); font-weight: 300; }
+
+  .name-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .password-wrapper {
+    position: relative;
+  }
+  .show-pass {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    cursor: pointer;
+    user-select: none;
+    opacity: 0.4;
+    transition: opacity 0.2s;
+  }
+  .show-pass:hover { opacity: 0.8; }
+
+  /* Password strength */
+  .strength-bar {
+    display: flex;
+    gap: 4px;
+    margin-top: 8px;
+  }
+  .strength-seg {
+    flex: 1;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--border);
+    transition: background 0.3s;
+  }
+  .strength-seg.strong { background: var(--success); }
+  .strength-seg.medium { background: #F59E0B; }
+
+  .strength-label {
+    font-size: 11px;
+    color: var(--success);
+    margin-top: 4px;
+    font-weight: 600;
+  }
+
+  /* Terms */
+  .terms {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+  .checkbox-custom {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--border);
+    border-radius: 5px;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+    cursor: pointer;
+    color: white;
+    font-size: 11px;
+  }
+  .terms p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+  .terms a { color: var(--accent); text-decoration: none; font-weight: 500; }
+
+  /* Submit */
+  .submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: -0.2px;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .submit-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px rgba(96,71,234,0.35);
+  }
+  .submit-btn::after {
+    content: '→';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: right 0.2s;
+  }
+  .submit-btn:hover::after { right: 16px; }
+
+  .signin-link {
+    text-align: center;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .signin-link a { color: var(--accent); text-decoration: none; font-weight: 600; }
+
+  /* Security badges */
+  .security-badges {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  .sec-badge {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+  <!-- Left panel -->
+  <div class="left-panel">
+    <div class="panel-logo">nexus<span>.</span></div>
+
+    <div class="panel-content">
+      <div class="panel-eyebrow">Join 12,000+ teams</div>
+      <h1 class="panel-title">Your workflow,<br><em>supercharged.</em></h1>
+      <p class="panel-desc">Start free in 2 minutes. No credit card required. Full access to all Pro features for your first 14 days.</p>
+
+      <div class="panel-features">
+        <div class="panel-feat">
+          <div class="feat-bullet">⚡</div>
+          <div class="feat-text">
+            <strong>Setup in under 5 minutes</strong>
+            <span>Connect your first tool and start automating immediately.</span>
+          </div>
+        </div>
+        <div class="panel-feat">
+          <div class="feat-bullet">🔗</div>
+          <div class="feat-text">
+            <strong>200+ integrations included</strong>
+            <span>Slack, Linear, Salesforce, GitHub — all ready to connect.</span>
+          </div>
+        </div>
+        <div class="panel-feat">
+          <div class="feat-bullet">🛡️</div>
+          <div class="feat-text">
+            <strong>SOC2 Type II certified</strong>
+            <span>Enterprise-grade security from day one, no upsell required.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="social-proof">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial">"Nexus replaced 6 tools for our team. We saved $2,400/month and our productivity doubled in the first month."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar"></div>
+          <div>
+            <div class="author-name">Alex Rivera</div>
+            <div class="author-role">Head of Operations, Acme Corp</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right panel -->
+  <div class="right-panel">
+    <div class="form-container">
+
+      <div class="form-header">
+        <div class="step-indicator">
+          <div class="step active"></div>
+          <div class="step"></div>
+          <div class="step"></div>
+        </div>
+        <h2>Create your<br><em>free account</em></h2>
+        <p>Step 1 of 3 — Your details</p>
+      </div>
+
+      <div class="oauth-group">
+        <button class="oauth-btn">
+          <span>G</span> Google
+        </button>
+        <button class="oauth-btn">
+          <span>⌥</span> GitHub
+        </button>
+        <button class="oauth-btn">
+          <span>◼</span> Slack
+        </button>
+      </div>
+
+      <div class="divider">or continue with email</div>
+
+      <form>
+        <div class="name-row">
+          <div class="form-group">
+            <label>First name</label>
+            <input type="text" placeholder="Alex">
+          </div>
+          <div class="form-group">
+            <label>Last name</label>
+            <input type="text" placeholder="Rivera">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Work email</label>
+          <input type="email" placeholder="alex@company.com">
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <div class="password-wrapper">
+            <input type="password" placeholder="Min 8 characters" value="MySecure123!">
+            <span class="show-pass">👁</span>
+          </div>
+          <div class="strength-bar">
+            <div class="strength-seg strong"></div>
+            <div class="strength-seg strong"></div>
+            <div class="strength-seg strong"></div>
+            <div class="strength-seg medium"></div>
+          </div>
+          <div class="strength-label">Strong password ✓</div>
+        </div>
+
+        <div class="form-group">
+          <label>Company name</label>
+          <input type="text" placeholder="Acme Inc.">
+        </div>
+
+        <div class="terms">
+          <div class="checkbox-custom">✓</div>
+          <p>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>. I'm okay with occasional product emails.</p>
+        </div>
+
+        <button type="submit" class="submit-btn">Create free account</button>
+
+        <p class="signin-link">Already have an account? <a href="#">Sign in</a></p>
+
+        <div class="security-badges">
+          <span class="sec-badge">🔒 256-bit SSL</span>
+          <span class="sec-badge">✓ SOC2 Certified</span>
+          <span class="sec-badge">🚫 No spam</span>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</body>
+</html>
